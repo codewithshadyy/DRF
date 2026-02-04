@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import Product
-from .serializers import  ProductSerializer
+from .models import (Product,Order )
+from .serializers import  (ProductSerializer, OrderItemSerializer, OrderSerializer)
 # from django_filters.rest_framework import DjangoFilterBackend
 # from .permissions import IsSellerOrAdminOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated
+
 
 
 # # class CategoryViewSet(ModelViewSet):
@@ -56,3 +59,10 @@ class ProductDetailAPIView(APIView):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
          
+
+class OrderListCreateView(ListCreateAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
