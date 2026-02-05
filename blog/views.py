@@ -5,7 +5,7 @@ from  rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from rest_framework import filters
-
+from django_filters.rest_framework import DjangoFilterBackend
 # Create your views here.
 
 
@@ -38,8 +38,10 @@ class UserListView(ListAPIView):
     
     serializer_class= UserSerializer
     queryset = User.objects.all() 
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['username', 'email']  
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['username', 'email']  
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username', 'email']
     
     
 class UserOrderListView(ListAPIView):

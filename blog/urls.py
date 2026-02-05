@@ -8,5 +8,5 @@ urlpatterns = [
         CommentListCreateAPIView.as_view(),
         name="post-comments"),
     path("users", UserListView.as_view(), name="users"),
-    path("users", UserOrderListView.as_view(), name="ordering")
+    # path("users", UserOrderListView.as_view(), name="ordering")
 ]
