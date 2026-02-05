@@ -1,10 +1,11 @@
 
-from .views import PostListCreateAPIView, CommentListCreateAPIView
+from .views import PostListCreateAPIView, CommentListCreateAPIView, UserListView
 from django.urls import path
 
 urlpatterns = [
     path("posts/", PostListCreateAPIView.as_view(), name="posts" ),
     path(  "posts/<int:post_id>/comments/",
         CommentListCreateAPIView.as_view(),
-        name="post-comments")
+        name="post-comments"),
+    path("users", UserListView.as_view(), name="users")
 ]

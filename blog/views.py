@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .models import Post, Comment
 from .serializers import PostSerializer, CommentSerializer, UserSerializer
-from  rest_framework.generics import ListCreateAPIView
+from  rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+from rest_framework import filters
 
 # Create your views here.
 
@@ -31,3 +33,9 @@ class CommentListCreateAPIView(ListCreateAPIView):
             author = self.request.user,
             post_id = self.kwargs["post_id"]            
                         )        
+        
+class UserListView(ListAPIView):
+    serializer_class= UserSerializer
+    queryset = User.objects.all() 
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username', 'email']       
