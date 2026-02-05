@@ -35,7 +35,15 @@ class CommentListCreateAPIView(ListCreateAPIView):
                         )        
         
 class UserListView(ListAPIView):
+    
     serializer_class= UserSerializer
     queryset = User.objects.all() 
     filter_backends = [filters.SearchFilter]
-    search_fields = ['username', 'email']       
+    search_fields = ['username', 'email']  
+    
+    
+class UserOrderListView(ListAPIView):
+    serializer_class= UserSerializer
+    queryset = User.objects.all() 
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['username', 'email']          
