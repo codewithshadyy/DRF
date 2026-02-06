@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/', include('products.urls')),
     path('post/', include("blog.urls")),
     path('auth-api/', include("rest_framework.urls")),
+    path('music/', include('music.urls'))
     
 ]
