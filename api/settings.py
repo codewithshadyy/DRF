@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'blog',
     'rest_framework.authtoken',
+    'music',
     
 ]
 
